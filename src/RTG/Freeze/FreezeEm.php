@@ -35,7 +35,7 @@ class FreezeEm extends PluginBase implements Listener {
 		");
 	}
 	
-	public function onCommand(CommandSender $sender, Command $cmd, $label, array $param) {
+	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $param) : bool {
 		switch(strtolower($cmd->getName())) {
 			
 			case "freeze":
@@ -47,22 +47,22 @@ class FreezeEm extends PluginBase implements Listener {
 						$p = $this->getServer()->getPlayer($v);
 						
 						if($p === null) {
-							$sender->sendMessage("[Freezer] §c$v §fisn't a Player!");
+							$sender->sendMessage("§7[§2Freezer§7] §c$v §2isn't a Player!");
 						}
 						else {
 							$n = $p->getName();
 							if($this->f->get($n) === false) {
 								$this->f->set($n);
 								$this->f->save();
-								$sender->sendMessage("[Freezer] §c$v §fhas been Permanently Frozen!");
+								$sender->sendMessage("§7[§cFreezer§7] §3$v §bhas been Permanently Frozen!");
 							}
 							else {
-								$sender->sendMessage("[Freezer] §e$v §fis already Frozen!");
+								$sender->sendMessage("§7[§cFreezer§7] §c$v §2is already Frozen!");
 							}
 						}
 					}
 					else {
-						$sender->sendMessage("Usage: /freeze <name>");
+						$sender->sendMessage("§7Please use: §e/freeze <name>");
 					}
 				}
 				else {
@@ -80,14 +80,14 @@ class FreezeEm extends PluginBase implements Listener {
 						if($this->f->get($v) === true) {
 							$this->f->remove($v);
 							$this->f->save();
-							$sender->sendMessage("[Freezer] §e$v §fhas been UnFrozen!");
+							$sender->sendMessage("§7[§cFreezer§7] §3$v §bhas been UnFrozen!");
 						}
 						else {
-							$sender->sendMessage("[Freezer] §b$v §eisnt Frozen!");
+							$sender->sendMessage("§7[§cFreezer] §c$v §2isn't Frozen!");
 						}
 					}
 					else {
-						$sender->sendMessage("Usage: /unfreeze <name>");
+						$sender->sendMessage("§7Please use: §e/unfreeze <name>");
 					}
 				}
 				else {
@@ -101,7 +101,7 @@ class FreezeEm extends PluginBase implements Listener {
 	public function onMove(PlayerMoveEvent $e) {
 		$n = $e->getPlayer()->getName();
 		if($this->f->get($n) === true) {
-			$e->getPlayer()->sendPopup("§cYou are frozen!");
+			$e->getPlayer()->sendPopup("§bYou are frozen! \n§aPlease screen share with a staff member on discord (If you have discord.)");
 			$e->setCancelled();
 		}
 	}
