@@ -1,8 +1,8 @@
 name: Freezer
-version: 1.0.0
+version: 1.0.1
 main: RTG\Freeze\FreezeEm
-api: [2.0.0, 2.1.0, 3.0.0]
-author: InspectorGadget
+api: [3.0.0-ALPHA11]
+author: VMPE Development Team
 commands:
   freeze:
     usage: "/freeze"
